@@ -9,10 +9,10 @@ describe Card do
     end
   end
 
-  describe "Card#suite" do
-    it "returns the card's suite" do
+  describe "Card#suit" do
+    it "returns the card's suit" do
       card = Card.new(:hearts, :three)
-      expect(card.suite).to eq(:hearts)
+      expect(card.suit).to eq(:hearts)
     end
   end
 end

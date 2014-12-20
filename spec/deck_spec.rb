@@ -21,7 +21,7 @@ describe "Deck" do
       last_card = my_deck.cards.last
       my_deck_size = my_deck.size
       expect(my_deck.take_card).to eq (last_card)
-      expect(my_deck.size).to eq (my_deck_size-1)
+      expect(my_deck.size).to eq(my_deck_size-1)
     end
   end
 

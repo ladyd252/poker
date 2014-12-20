@@ -7,12 +7,12 @@ class Hand
 
   end
 
-  def beats(other_hand)
+  def <=>(other_hand)
 
     if hand_value > other_hand.hand_value
       1
     elsif hand_value == other_hand.hand_value
-      win_tie_breaker
+      win_tie_breaker(other_hand)
     else
       -1
     end
@@ -57,7 +57,7 @@ class Hand
   end
 
 
- 
+
 
 
   def card_values
@@ -143,12 +143,12 @@ class Hand
   end
 
   def flush?
-    same_suite?
+    same_suit?
   end
 
-  def cotains_suite?(suite)
+  def cotains_suit?(suit)
     cards.each do |card|
-      return true if card.suite == suite
+      return true if card.suit == suit
     end
     false
   end
@@ -160,9 +160,9 @@ class Hand
     false
   end
 
-  def same_suite?
-    suite = cards.first.suite
-    cards.all? { |card| card.suite == suite }
+  def same_suit?
+    suit = cards.first.suit
+    cards.all? { |card| card.suit == suit }
   end
 
 

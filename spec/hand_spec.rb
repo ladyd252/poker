@@ -1,4 +1,5 @@
 require 'hand'
+require 'card'
 require 'rspec'
 
 describe "Hand" do
@@ -53,58 +54,34 @@ describe "Hand" do
   }
 
   describe "Hand#initialize" do
-    let(:cards) { [1, 2, 3, 4, 5] }
+    let(:cards) { four_kind }
 
     it "initializes to 5 cards" do
       my_hand =  Hand.new(cards)
       expect(my_hand.cards.size).to eq(5)
-      expect(my_hand.cards).to match_array([1,3,2,4,5])
+      expect(my_hand.cards).to match_array(four_kind)
     end
   end
 
-  describe "Hand#beats?" do
-
-    it "returns true for a four of a kind again full house" do
-      my_hand = Hands.new(four_kind)
-      other_hand = Hands.new(full_house)
-      expect(my_hand.beats?(other_hand)).to eq(true)
+  describe "Hand#<=>" do
+    it "returns 1 for a four of a kind again full house" do
+      four_kind_hand = Hand.new(four_kind)
+      full_house_hand = Hand.new(full_house)
+      expect(four_kind_hand <=> full_house_hand).to eq(1)
     end
+
+    it "returns -1 for a straight against full house" do
+      my_hand = Hand.new(straight_no_ace)
+      other_hand = Hand.new(full_house)
+      expect(my_hand <=> other_hand).to eq(-1)
+    end
+
+    it "returns 0 for a straight against straight" do
+      my_hand = Hand.new(straight_no_ace)
+      other_hand = Hand.new(straight_start_ace)
+      expect(my_hand <=> other_hand).to eq(0)
+    end
+
   end
 
-  describe "Hand#four_kind?" do
-    it "returns true for a four of a kind" do
-      hand = Hand.new(four_kind)
-      expect(hand.four_kind?).to eq(true)
-    end
-
-    it "returns false for a full house" do
-      hand = Hand.new(full_house)
-      expect(hand.four_kind?).to eq(false)
-    end
-  end
-
-  describe "Hand#full_house?" do
-    it "returns true for a full_house" do
-      hand = Hand.new(full_house)
-      expect(hand.full_house?).to eq(true)
-    end
-
-    it "returns false for a four of a kind" do
-      hand = Hand.new(four_kind)
-      expect(hand.full_house?).to eq(false)
-    end
-  end
-
-  describe "Hand#straight?" do
-    it "returns true for a straight" do
-      hand1 = Hand.new(straight_no_ace)
-      hand2 = Hand.new(straight_start_ace)
-      hand3 = Hand.new(straight_end_ace)
-      hand4 = Hand.new(full_house)
-      expect(hand1.straight?).to eq(true)
-      expect(hand2.straight?).to eq(true)
-      expect(hand3.straight?).to eq(true)
-      expect(hand4.straight?).to eq(false)
-    end
-  end
 end

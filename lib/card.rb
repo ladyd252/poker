@@ -1,7 +1,11 @@
 class Card
-  attr_reader :suite, :value
-  def initialize(suite, value)
-    @suite = suite
+  SUITS = [:hearts, :clubs, :diamonds, :spades]
+  VALUES = [:ace,:two,:three,:four,:five,:six,:seven,:eight,:nine,:ten,:jack,
+    :queen,:king]
+
+  attr_reader :suit, :value
+  def initialize(suit, value)
+    @suit = suit
     @value = value
   end
 

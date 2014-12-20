@@ -1,11 +1,7 @@
+require_relative 'card.rb'
 
 class Deck
   attr_reader :cards
-
-  SUITES = [:hearts, :clubs, :diamonds, :spades]
-  VALUES = [:ace,:two,:three,:four,:five,:six,:seven,:eight,:nine,:ten,:jack,
-    :queen,:king]
-
 
   def initialize
     @cards = create_cards
@@ -18,9 +14,9 @@ class Deck
   def create_cards
     deck = []
 
-    SUITES.each do |suite|
-      VALUES.each do |value|
-        deck << Card.new(suite,value)
+    Card::SUITS.each do |suit|
+      Card::VALUES.each do |value|
+        deck << Card.new(suit, value)
       end
     end
     deck.shuffle
